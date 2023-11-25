@@ -1,3 +1,17 @@
+<template>
+  <div class="setting-container">
+    <h4>布局配置</h4>
+    <SelectLayoutMode />
+    <el-divider />
+    <h4>功能配置</h4>
+    <div class="setting-item" v-for="(settingValue, settingName, index) in switchSettings" :key="index">
+      <span class="setting-name">{{ settingName }}</span>
+      <el-switch v-model="settingValue.value" :disabled="layoutMode !== 'left' && settingName === '固定 Header'" />
+    </div>
+    <el-button type="danger" :icon="Refresh" @click="resetConfigLayout">重 置</el-button>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import { watchEffect } from "vue"
 import { storeToRefs } from "pinia"
@@ -46,20 +60,6 @@ watchEffect(() => {
   layoutMode.value !== "left" && (fixedHeader.value = true)
 })
 </script>
-
-<template>
-  <div class="setting-container">
-    <h4>布局配置</h4>
-    <SelectLayoutMode />
-    <el-divider />
-    <h4>功能配置</h4>
-    <div class="setting-item" v-for="(settingValue, settingName, index) in switchSettings" :key="index">
-      <span class="setting-name">{{ settingName }}</span>
-      <el-switch v-model="settingValue.value" :disabled="layoutMode !== 'left' && settingName === '固定 Header'" />
-    </div>
-    <el-button type="danger" :icon="Refresh" @click="resetConfigLayout">重 置</el-button>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 @import "@/styles/mixins.scss";

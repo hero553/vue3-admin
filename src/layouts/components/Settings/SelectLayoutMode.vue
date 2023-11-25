@@ -1,17 +1,3 @@
-<script lang="ts" setup>
-import { computed } from "vue"
-import { storeToRefs } from "pinia"
-import { useSettingsStore } from "@/store/modules/settings"
-
-const settingsStore = useSettingsStore()
-
-const { layoutMode } = storeToRefs(settingsStore)
-
-const isLeft = computed(() => layoutMode.value === "left")
-const isTop = computed(() => layoutMode.value === "top")
-const isLeftTop = computed(() => layoutMode.value === "left-top")
-</script>
-
 <template>
   <div class="select-layout-mode">
     <el-tooltip content="左侧模式">
@@ -40,6 +26,20 @@ const isLeftTop = computed(() => layoutMode.value === "left-top")
     </el-tooltip>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { computed } from "vue"
+import { storeToRefs } from "pinia"
+import { useSettingsStore } from "@/store/modules/settings"
+
+const settingsStore = useSettingsStore()
+
+const { layoutMode } = storeToRefs(settingsStore)
+
+const isLeft = computed(() => layoutMode.value === "left")
+const isTop = computed(() => layoutMode.value === "top")
+const isLeftTop = computed(() => layoutMode.value === "left-top")
+</script>
 
 <style lang="scss" scoped>
 .select-layout-mode {

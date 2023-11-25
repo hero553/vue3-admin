@@ -1,12 +1,13 @@
-<script lang="ts" setup>
-import { useUserStore } from "@/store/modules/user"
-import Admin from "./components/Admin.vue"
-import Editor from "./components/Editor.vue"
+<template>
+  <div class="flex justify-center">
+    {{ counter }}
+  </div>
+</template>
 
-const userStore = useUserStore()
-const isAdmin = userStore.roles.includes("admin")
+<script setup lang="ts">
+import { useInterval } from "@vueuse/core"
+const { resume, counter } = useInterval(1000, { controls: true })
+resume()
 </script>
 
-<template>
-  <component :is="isAdmin ? Admin : Editor" />
-</template>
+<style scoped></style>
