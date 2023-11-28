@@ -1,3 +1,31 @@
+<template>
+  <div class="tags-view-container">
+    <ScrollPane class="tags-view-wrapper" :tag-refs="tagRefs">
+      <router-link
+        ref="tagRefs"
+        v-for="tag in tagsViewStore.visitedViews"
+        :key="tag.path"
+        :class="{ active: isActive(tag) }"
+        class="tags-view-item"
+        :to="{ path: tag.path, query: tag.query }"
+        @click.middle="!isAffix(tag) && closeSelectedTag(tag)"
+        @contextmenu.prevent="openMenu(tag, $event)"
+      >
+        {{ tag.meta?.title }}
+        <el-icon v-if="!isAffix(tag)" :size="12" @click.prevent.stop="closeSelectedTag(tag)">
+          <Close />
+        </el-icon>
+      </router-link>
+    </ScrollPane>
+    <ul v-show="visible" class="contextmenu" :style="{ left: left + 'px', top: top + 'px' }">
+      <li @click="refreshSelectedTag(selectedTag)">刷新</li>
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
+      <li @click="closeOthersTags">关闭其它</li>
+      <li @click="closeAllTags(selectedTag)">关闭所有</li>
+    </ul>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import { getCurrentInstance, onMounted, ref, watch } from "vue"
 import { type RouteLocationNormalizedLoaded, type RouteRecordRaw, RouterLink, useRoute, useRouter } from "vue-router"
@@ -162,34 +190,6 @@ onMounted(() => {
 })
 </script>
 
-<template>
-  <div class="tags-view-container">
-    <ScrollPane class="tags-view-wrapper" :tag-refs="tagRefs">
-      <router-link
-        ref="tagRefs"
-        v-for="tag in tagsViewStore.visitedViews"
-        :key="tag.path"
-        :class="{ active: isActive(tag) }"
-        class="tags-view-item"
-        :to="{ path: tag.path, query: tag.query }"
-        @click.middle="!isAffix(tag) && closeSelectedTag(tag)"
-        @contextmenu.prevent="openMenu(tag, $event)"
-      >
-        {{ tag.meta?.title }}
-        <el-icon v-if="!isAffix(tag)" :size="12" @click.prevent.stop="closeSelectedTag(tag)">
-          <Close />
-        </el-icon>
-      </router-link>
-    </ScrollPane>
-    <ul v-show="visible" class="contextmenu" :style="{ left: left + 'px', top: top + 'px' }">
-      <li @click="refreshSelectedTag(selectedTag)">刷新</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
-      <li @click="closeOthersTags">关闭其它</li>
-      <li @click="closeAllTags(selectedTag)">关闭所有</li>
-    </ul>
-  </div>
-</template>
-
 <style lang="scss" scoped>
 .tags-view-container {
   height: var(--v3-tagsview-height);
@@ -260,7 +260,7 @@ onMounted(() => {
       padding: 7px 16px;
       cursor: pointer;
       &:hover {
-        background-color: #eee;
+        background-color: #479a5e !important;
       }
     }
   }

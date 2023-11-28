@@ -1,12 +1,16 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center items-center">
     {{ counter }}
   </div>
 </template>
 
 <script setup lang="ts">
-import { useInterval } from "@vueuse/core"
-const { resume, counter } = useInterval(1000, { controls: true })
+import { useIntervalFn } from "@vueuse/core"
+import { ref } from "vue"
+const counter = ref(0)
+const { resume } = useIntervalFn(() => {
+  counter.value++
+}, 1000)
 resume()
 </script>
 

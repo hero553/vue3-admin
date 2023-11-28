@@ -1,3 +1,35 @@
+<template>
+  <div class="navigation-bar">
+    <Hamburger v-if="!isTop || isMobile" :is-active="sidebar.opened" class="hamburger" @toggle-click="toggleSidebar" />
+    <Breadcrumb v-if="!isTop || isMobile" class="breadcrumb" />
+    <Sidebar v-if="isTop && !isMobile" class="sidebar" />
+    <div class="right-menu">
+      <SearchMenu v-if="showSearchMenu" class="right-menu-item" />
+      <Screenfull v-if="showScreenfull" class="right-menu-item" />
+      <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" />
+      <Notify v-if="showNotify" class="right-menu-item" />
+      <el-dropdown class="right-menu-item">
+        <div class="right-menu-avatar">
+          <img class="rounded-[50%] mr-2" :src="Avatar" width="30" height="30" />
+          <span>{{ userStore.username }}</span>
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <a target="_blank" href="https://github.com/un-pany/v3-admin-vite">
+              <el-dropdown-item>GitHub</el-dropdown-item>
+            </a>
+            <a target="_blank" href="https://gitee.com/un-pany/v3-admin-vite">
+              <el-dropdown-item>Gitee</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided @click="logout">
+              <span style="display: block">退出登录</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
+  </div>
+</template>
 <script lang="ts" setup>
 import { computed } from "vue"
 import { useRouter } from "vue-router"
@@ -5,7 +37,8 @@ import { storeToRefs } from "pinia"
 import { useAppStore } from "@/store/modules/app"
 import { useSettingsStore } from "@/store/modules/settings"
 import { useUserStore } from "@/store/modules/user"
-import { UserFilled } from "@element-plus/icons-vue"
+// import { UserFilled } from "@element-plus/icons-vue"
+import Avatar from "@/assets/imgs/avatar.jpg"
 import Hamburger from "../Hamburger/index.vue"
 import Breadcrumb from "../Breadcrumb/index.vue"
 import Sidebar from "../Sidebar/index.vue"
@@ -37,39 +70,6 @@ const logout = () => {
   router.push("/login")
 }
 </script>
-
-<template>
-  <div class="navigation-bar">
-    <Hamburger v-if="!isTop || isMobile" :is-active="sidebar.opened" class="hamburger" @toggle-click="toggleSidebar" />
-    <Breadcrumb v-if="!isTop || isMobile" class="breadcrumb" />
-    <Sidebar v-if="isTop && !isMobile" class="sidebar" />
-    <div class="right-menu">
-      <SearchMenu v-if="showSearchMenu" class="right-menu-item" />
-      <Screenfull v-if="showScreenfull" class="right-menu-item" />
-      <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" />
-      <Notify v-if="showNotify" class="right-menu-item" />
-      <el-dropdown class="right-menu-item">
-        <div class="right-menu-avatar">
-          <el-avatar :icon="UserFilled" :size="30" />
-          <span>{{ userStore.username }}</span>
-        </div>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <a target="_blank" href="https://github.com/un-pany/v3-admin-vite">
-              <el-dropdown-item>GitHub</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://gitee.com/un-pany/v3-admin-vite">
-              <el-dropdown-item>Gitee</el-dropdown-item>
-            </a>
-            <el-dropdown-item divided @click="logout">
-              <span style="display: block">退出登录</span>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .navigation-bar {
@@ -119,9 +119,6 @@ const logout = () => {
       .right-menu-avatar {
         display: flex;
         align-items: center;
-        .el-avatar {
-          margin-right: 10px;
-        }
         span {
           font-size: 16px;
         }

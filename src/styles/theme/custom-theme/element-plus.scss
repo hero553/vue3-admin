@@ -1,0 +1,112 @@
+/**
+ * dark-blue 主题下的 Element Plus CSS 变量
+ * 在此查阅所有可自定义的变量：https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
+ * 也可以打开浏览器控制台选择元素，查看要覆盖的变量名
+ */
+@import './variables.scss';
+
+html.custom-theme {
+  /** color */
+  --el-color-primary: #479a5e;
+  --el-color-primary-light-3: rgba(71,154,94, 0.8133333333);
+  --el-color-primary-light-5: rgba(71,154,94, 0.8666666667);
+  --el-color-primary-light-7: rgba(71,154,94, 0.92);
+  --el-color-primary-light-8: rgba(71,154,94, 0.9466666667);
+  --el-color-primary-light-9: none;
+  --el-color-primary-dark-2: rgba(71,154,94, 0.7866666667);
+  --el-color-success: #479a5e;
+  /** text-color */
+  --el-text-color-primary: #333;
+  --el-text-color-regular: #333;
+  --el-text-color-secondary: #333;
+  --el-text-color-placeholder: #95969D;
+  --el-text-color-disabled: rgba(255, 255, 255, 0.3);
+  /** border-color */
+  --el-border-color: #dcdfe6;
+  --el-border-color-light: #e4e7ed;
+  --el-border-color-lighter: #ebeef5;
+  --el-border-color-hover: #479a5e;
+  /** fill-color */
+  --el-fill-color: #F5F5F599;
+  --el-fill-color-light: #F5F5F599;
+  --el-fill-color-blank: #ffffff;
+  /** bg-color */
+  --el-bg-color: #ffffff;
+  --el-bg-color-overlay: #ffffff;
+  /** mask */
+  --el-mask-color: #ffffff;
+}
+
+
+
+/** button */
+html.custom-theme .el-button {
+  --el-button-disabled-text-color: rgba(255, 255, 255, 0.5);
+}
+
+/** menu */
+html.custom-theme{
+  .app-wrapper {
+    // 侧边栏
+    .sidebar-container {
+      background-color: #fff;
+      color: #333;
+      box-shadow: var(--el-box-shadow-lighter) !important;
+      .el-menu {
+        background-color: $theme-bg-color !important;
+        color: #333;
+        .el-menu-item {
+          background-color: $theme-bg-color !important;
+          color: #333 ;
+          &.is-active {
+            background-color: lighten(#479a5e, 10%) !important;
+            color: $active-font-color;
+          }
+          &:hover {
+            background-color: lighten(#479a5e, 30%) !important;
+            color: $active-font-color;
+          }
+        }
+      }
+      .el-sub-menu__title {
+        background-color: $theme-bg-color !important;
+        color: #333 !important;
+      }
+      .el-sub-menu {
+        &.is-active {
+          > .el-sub-menu__title {
+            color: #479a5e !important;
+          }
+        }
+      }
+    }
+  }
+
+  // 顶部导航栏
+  .navigation-bar {
+    background-color: #fff !important;
+    .right-menu {
+      .svg-icon {
+        color: $font-color;
+      }
+    }
+  }
+
+  // TagsView
+  .tags-view-container {
+    background-color: #fff !important;
+    .tags-view-item {
+      background-color: #fff !important;
+      color: $font-color !important;
+      border: 1px solid $border-color !important;
+      &.active {
+        background-color: $theme-color !important;
+        color: $active-font-color !important;
+        border-color: $border-color !important;
+      }
+    }
+  }
+  .el-table {
+    --el-table-row-hover-bg-color: #71F6B51A;
+  }
+}
