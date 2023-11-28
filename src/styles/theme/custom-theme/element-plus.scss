@@ -20,7 +20,7 @@ html.custom-theme {
   --el-text-color-regular: #333;
   --el-text-color-secondary: #333;
   --el-text-color-placeholder: #95969D;
-  --el-text-color-disabled: rgba(255, 255, 255, 0.3);
+  --el-text-color-disabled: #c0c4cc;
   /** border-color */
   --el-border-color: #dcdfe6;
   --el-border-color-light: #e4e7ed;
@@ -60,11 +60,9 @@ html.custom-theme{
           color: #333 ;
           &.is-active {
             background-color: lighten(#479a5e, 10%) !important;
-            color: $active-font-color;
           }
           &:hover {
             background-color: lighten(#479a5e, 30%) !important;
-            color: $active-font-color;
           }
         }
       }
@@ -106,7 +104,20 @@ html.custom-theme{
       }
     }
   }
+  /** 表格主题 */
   .el-table {
     --el-table-row-hover-bg-color: #71F6B51A;
+  }
+  /** el-dropdown-menu 主题 */
+  .el-dropdown__popper {
+    --el-dropdown-menuItem-hover-fill: #5fb577;
+    --el-dropdown-menuItem-hover-color: #fff;
+  }
+  .vxe-input{
+    .vxe-input--inner {
+      &:hover{
+        border: 1px solid #5fb577;
+      }
+    }
   }
 }

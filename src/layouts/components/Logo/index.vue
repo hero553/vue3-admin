@@ -1,9 +1,21 @@
+<template>
+  <div class="layout-logo-container" :class="{ collapse: props.collapse, 'layout-mode-top': layoutMode === 'top' }">
+    <transition name="layout-logo-fade">
+      <router-link v-if="props.collapse" key="collapse" to="/">
+        <img :src="logo" class="layout-logo" />
+      </router-link>
+      <router-link v-else key="expand" to="/">
+        <!-- <img :src="layoutMode !== 'left' ? logoText2 : logoText1" class="layout-logo-text" /> -->
+        <span class="text-[#333] font-bold">品办管家系统</span>
+      </router-link>
+    </transition>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import { storeToRefs } from "pinia"
 import { useSettingsStore } from "@/store/modules/settings"
 import logo from "@/assets/layouts/logo.png?url"
-import logoText1 from "@/assets/layouts/logo-text-1.png?url"
-import logoText2 from "@/assets/layouts/logo-text-2.png?url"
 
 interface Props {
   collapse?: boolean
@@ -17,25 +29,12 @@ const settingsStore = useSettingsStore()
 const { layoutMode } = storeToRefs(settingsStore)
 </script>
 
-<template>
-  <div class="layout-logo-container" :class="{ collapse: props.collapse, 'layout-mode-top': layoutMode === 'top' }">
-    <transition name="layout-logo-fade">
-      <router-link v-if="props.collapse" key="collapse" to="/">
-        <img :src="logo" class="layout-logo" />
-      </router-link>
-      <router-link v-else key="expand" to="/">
-        <img :src="layoutMode !== 'left' ? logoText2 : logoText1" class="layout-logo-text" />
-      </router-link>
-    </transition>
-  </div>
-</template>
-
 <style lang="scss" scoped>
 .layout-logo-container {
   position: relative;
   width: 100%;
-  height: var(--v3-header-height);
-  line-height: var(--v3-header-height);
+  height: 50px;
+  line-height: 50px;
   background-color: transparent;
   text-align: center;
   overflow: hidden;

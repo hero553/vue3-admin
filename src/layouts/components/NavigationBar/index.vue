@@ -10,7 +10,7 @@
       <Notify v-if="showNotify" class="right-menu-item" />
       <el-dropdown class="right-menu-item">
         <div class="right-menu-avatar">
-          <img class="rounded-[50%] mr-2" :src="Avatar" width="30" height="30" />
+          <img class="rounded-[50%] mr-3" :src="Avatar" width="30" height="30" />
           <span>{{ userStore.username }}</span>
         </div>
         <template #dropdown>
